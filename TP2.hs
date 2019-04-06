@@ -177,3 +177,211 @@ fiestaPokemon (e:es) = pokemons e ++ fiestaPokemon es
 
 pokemons :: Entrenador -> [Pokemon]
 pokemons (ConsE _ p) = p
+
+----------------------------------------------------------------------------------------------
+
+--Ejercicio 4
+
+data Pizza = Prepizza | Agregar Ingrediente Pizza  	deriving (Show,Eq)
+
+data Ingrediente = Salsa | Queso | Jamon | AceitunasVerdes Int deriving(Show, Eq)
+
+sacar :: [Ingrediente] -> Pizza -> Pizza
+--Saca los ingredientes de la pizza que se encuentren en la lista
+sacar []	 p = p
+sacar (x:xs) p = if(hayIngrediente x p)
+					then sacarIngrediente x (sacar xs p)
+					else sacar xs p
+
+hayIngrediente :: Ingrediente -> Pizza -> Bool
+hayIngrediente i Prepizza		= False
+hayIngrediente i (Agregar x p)	= i == x || hayIngrediente i p
+
+sacarIngrediente :: Ingrediente -> Pizza -> Pizza
+sacarIngrediente x Prepizza			= Prepizza
+sacarIngrediente x (Agregar i p)	= if (x == i)
+										then p
+										else sacarIngrediente x p 
+
+
+cantJamon :: [Pizza] -> [(Int, Pizza)]
+--Dada una lista de pizzas devuelve un par donde la primera componente es la cantidad de jamón de la pizza que es la segunda componente.
+cantJamon []		= []
+cantJamon (x:xs)	= tuplaConCantJamon x : cantJamon xs
+
+tuplaConCantJamon :: Pizza -> (Int, Pizza)
+tuplaConCantJamon Prepizza			= (0,Prepizza)
+tuplaConCantJamon (Agregar Jamon p) = ( 1 + fst (tuplaConCantJamon p), snd (tuplaConCantJamon p))
+tuplaConCantJamon p 				=  tuplaConCantJamon p 
+
+mayorNAceitunas :: Int -> [Pizza] -> [Pizza]
+--Devuelve las pizzas con más de “n” aceitunas.
+mayorNAceitunas n []		= []
+mayorNAceitunas n (x:xs)	= if(cantAceitunas x > n)
+								then x: mayorNAceitunas n xs
+								else mayorNAceitunas n xs
+
+cantAceitunas :: Pizza -> Int
+cantAceitunas Prepizza 							= 0	
+cantAceitunas (Agregar (AceitunasVerdes n) p)	= 1 + cantAceitunas p
+cantAceitunas (Agregar _ p)						= 0 + cantAceitunas p
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Ejercicio 5 
+
+data Objeto = Cacharro | Tesoro
+data Camino = Fin | Cofre [Objeto] Camino | Nada Camino
+
+objeto1 = [Cacharro, Tesoro]
+objeto2 = [Cacharro, Cacharro]
+
+caminoConTesoro = Cofre objeto1 (Nada Fin)
+caminoSinTesoro = Cofre objeto2 (Nada Fin)
+camino3 = Cofre objeto2 caminoConTesoro 
+
+hayTesoro :: Camino -> Bool
+--Indica si hay un cofre con un tesoro en el camino.
+hayTesoro Fin			= False
+hayTesoro (Nada c)		= False || hayTesoro c
+hayTesoro (Cofre obs c)	= hayTesoroC obs || hayTesoro c
+
+hayTesoroC :: [Objeto] -> Bool
+hayTesoroC []		= False
+hayTesoroC (x:xs)	= esTesoro x || hayTesoroC xs
+
+esTesoro ::  Objeto -> Bool
+esTesoro Cacharro 	= False
+esTesoro Tesoro 	= True
+
+
+pasosHastaTesoro :: Camino -> Int
+--Indica la cantidad de pasos que hay que recorrer hasta llegar al primer
+--cofre con un tesoro. Si un cofre con un tesoro está al principio del camino, la cantidad de pasos a recorrer es 0.
+pasosHastaTesoro Fin			= 0
+pasosHastaTesoro (Nada c)		= 1 + pasosHastaTesoro c
+pasosHastaTesoro (Cofre obs c)	= if(hayTesoroC obs) 
+									then 0
+									else 1 + pasosHastaTesoro c 
+
+
+hayTesoroEn :: Int -> Camino -> Bool
+--Indica si hay un tesoro en una cierta cantidad exacta de pasos. Por ejemplo, si el número de pasos es 5, indica si hay un tesoro en 5 pasos.
+hayTesoroEn 0 c = hayTesoroEnPasos c 
+hayTesoroEn n c = hayTesoroEn (n-1) c
+
+hayTesoroEnPasos :: Camino -> Bool
+hayTesoroEnPasos Fin		   = False
+hayTesoroEnPasos (Nada c)      = hayTesoroEnPasos c
+hayTesoroEnPasos (Cofre obs c) = hayTesoroC obs
+
+alMenosNTesoros :: Int -> Camino -> Bool
+--Indica si hay al menos “n” tesoros en el camino.
+alMenosNTesoros n Fin			= False
+alMenosNTesoros n (Nada c)		= alMenosNTesoros n c 
+alMenosNTesoros n c				= cantTesoro c > n 
+
+
+cantTesoro :: Camino -> Int
+cantTesoro Fin				= 0
+cantTesoro (Nada c )		= 0 +  cantTesoro c 
+cantTesoro (Cofre objs c ) 	= if(hayTesoroC objs)
+								then 1 + cantTesoro c
+								else 0 + cantTesoro c
+
+cantTesorosEntre :: Int -> Int -> Camino -> Int
+--Dado un rango de pasos, indica la cantidad de tesoros que hay en ese
+--rango. Por ejemplo, si el rango es 3 y 5, indica la cantidad de tesoros
+--que hay entre hacer 3 pasos y hacer 5. Están incluidos tanto 3 como 5 en el resultado.
+cantTesorosEntre n m Fin			= 0
+cantTesorosEntre n m (Nada c )		= cantTesorosEntre n (m-1) c 
+cantTesorosEntre n m (Cofre objs c)	= if (n == m)
+										then cantTesoroC objs
+										else cantTesoroC objs + cantTesorosEntre n (m-1) c 
+cantTesoroC :: [Objeto] -> Int
+cantTesoroC []		= 0
+cantTesoroC (x:xs)	= if (esTesoro x )
+						then 1 + cantTesoroC xs
+						else 0 + cantTesoroC xs
+----------------------------------------------------------------------------------------------------------
+
+-- Ejercicio 6
+
+data ListaNoVacia a = Unit a | Cons a (ListaNoVacia a) deriving (Show,Eq)
+
+lengthL :: ListaNoVacia a -> Int
+--Retorna la longitud de la lista.
+lengthL (Unit x) 	= 0
+lengthL (Cons x l)	= 1 + lengthL l 
+
+headL :: ListaNoVacia a -> a
+--Devuelve el primer elemento de la lista. ¿Es una función parcial o total? es total
+headL (Unit x)	= x
+headL (Cons x l)	= headL l
+
+tailL :: ListaNoVacia a -> ListaNoVacia a
+--Devuelve el resto de la lista sacando el primer elemento. Pensar bien
+--qué pasa en caso de que la lista tenga un sólo elemento. ¿Es una
+--función parcial o total?
+tailL (Unit x)		= error"La lista tiene un solo elemento"
+tailL (Cons x l)	= l 
+
+
+minimoL :: ListaNoVacia Int -> Int
+--Dada una lista retorna el mínimo de dicha lista. ¿Es una función parcial o total?
+minimoL (Unit x)		= x
+minimoL (Cons x l)	= min x (minimoL l)
+
+---------------------------------------------------------------------------------------------------------
+
+--Ejercicio 7
+
+data T a = A | B a | C a a | D (T a) | E a (T a) deriving (Show,Eq)
+
+size :: T a -> Int
+--Retorna la cantidad de elementos de una estructura T.
+size A 			= 0
+size (B x)		= 1 
+size (C x s)	= 2
+size (D t)		= 0 + size t
+size (E x t)	= 1 + size t
+
+sumT :: T Int -> Int
+--Retorna la suma de todos los elementos.
+sumT A 			= 0
+sumT (B n)		= n
+sumT (C n m)	= n + m
+sumT (D t)		= sumT t
+sumT (E n t)	= n + sumT t
+
+hayD :: T a -> Bool
+--Indica si existe al menos una aparición de D en la estructura.
+hayD A 			= False
+hayD (B n)		= False
+hayD (C n m)	= False
+hayD (D t)		= True
+hayD (E n t)	= False || hayD t
+
+cantE :: T a -> Int
+--Retorna la cantidad de D que existen en la estructura.
+cantE A 		= 0
+cantE (B n)		= 0
+cantE (C n m)	= 0
+cantE (D t)		= 1 + cantE t
+cantE (E n t)	= 0 + cantE t
+
+recolectarC :: T a -> (a, a)
+--Retorna los valores del constructor C. Notar que ese constructor puede no darse en la estructura.
+recolectarC A 		= error "el constructor es A"
+recolectarC (B x)	= error "el constructor es B"
+recolectarC (C x z)	= (x, z)
+recolectarC (D t)	= recolectarC t
+recolectarC (E x t)	= recolectarC t
+
+toList :: T a -> [a]
+--Convierte la estructura a una lista, conservando el orden de los elementos.
+toList A 		= []
+toList (B x)	= [x]
+toList (C x z)	= x:[z]
+toList (D t)	= toList t
+toList (E x t)	= x : toList t

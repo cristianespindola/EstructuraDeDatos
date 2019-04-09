@@ -238,7 +238,7 @@ objeto2 = [Cacharro, Cacharro]
 
 caminoConTesoro = Cofre objeto1 (Nada Fin)
 caminoSinTesoro = Cofre objeto2 (Nada Fin)
-camino3 = Cofre objeto2 caminoConTesoro 
+camino3 = Cofre objeto1 caminoConTesoro
 
 hayTesoro :: Camino -> Bool
 --Indica si hay un cofre con un tesoro en el camino.
@@ -293,11 +293,16 @@ cantTesorosEntre :: Int -> Int -> Camino -> Int
 --Dado un rango de pasos, indica la cantidad de tesoros que hay en ese
 --rango. Por ejemplo, si el rango es 3 y 5, indica la cantidad de tesoros
 --que hay entre hacer 3 pasos y hacer 5. Están incluidos tanto 3 como 5 en el resultado.
+cantTesorosEntre 0 0 Fin			= 0
+cantTesorosEntre 0 0 (Nada c )		= 0
+cantTesorosEntre 0 0 (Cofre objs c)	= cantTesoroC objs
+cantTesorosEntre 0 m (Nada c )		= cantTesorosEntre 0 (m-1) c 
+cantTesorosEntre 0 m (Cofre objs c)	= cantTesoroC objs + cantTesorosEntre 0 (m-1) c
 cantTesorosEntre n m Fin			= 0
-cantTesorosEntre n m (Nada c )		= cantTesorosEntre n (m-1) c 
-cantTesorosEntre n m (Cofre objs c)	= if (n == m)
-										then cantTesoroC objs
-										else cantTesoroC objs + cantTesorosEntre n (m-1) c 
+cantTesorosEntre n m (Nada c )		= cantTesorosEntre (n-1) (m-1) c 
+cantTesorosEntre n m (Cofre objs c)	= cantTesorosEntre (n-1) (m-1) c
+
+
 cantTesoroC :: [Objeto] -> Int
 cantTesoroC []		= 0
 cantTesoroC (x:xs)	= if (esTesoro x )

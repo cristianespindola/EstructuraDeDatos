@@ -124,3 +124,63 @@ todosLosCaminos (NodeT x t1 t2)	= unir x (todosLosCaminos t1 ++ todosLosCaminos 
 unir :: a -> [[a]] -> [[a]]
 unir x [] = [[x]]
 unir x (y:ys) 	= (x: y) : unir x ys 
+
+-------------------------------------------------------------------------------------------------------------
+
+data Dir = Izq | Der
+data Objeto = Tesoro | Chatarra
+data Mapa = Cofre Objeto | Bifurcacion Objeto Mapa Mapa
+
+
+hayTesoro :: Mapa -> Bool
+--indica si el obj es tesoro
+hayTesoro (Cofre obj)			  = hayTesoroO obj
+hayTesoro (Bifurcacion obj m1 m2) = hayTesoroO obj || hayTesoro m1 || hayTesoro m2
+
+hayTesoroO :: Objeto -> Bool
+--Indica si hay un tesoro en alguna parte del mapa.
+hayTesoroO Tesoro = True
+hayTesoroO _ 	  = False	 
+
+--Indica si al final del camino hay un tesoro. Nota: el final del camino es la lista vacía de direcciones.
+hayTesoroEn :: [Dir] -> Mapa -> Bool
+hayTesoroEn [] m 	 					 = hayTesoro m
+hayTesoroEn ds (Cofre obj) 				 = False
+hayTesoroEn (Izq:ds) (Bifurcacion m1 m2) = hayTesoroEn ds m1
+hayTesoroEn (Der:ds) (Bifurcacion m1 m2) = hayTesoroEn ds m2
+
+--Indica el camino al tesoro. Precondición: hay un sólo tesoro en el mapa.
+caminoAlTesoro :: Mapa -> [Dir]
+caminoAlTesoro (Cofre obj)				= []
+caminoAlTesoro (Bifurcacion obj m1 m2)	= if(hayTesoro m1)
+											then Izq : caminoAlTesoro m1
+											else Der : caminoAlTesoro m2 
+
+--Indica el camino de la rama más larga.
+caminoRamaMasLarga :: Mapa -> [Dir]
+caminoRamaMasLarga (Cofre obj)				= []
+caminoRamaMasLarga (Bifurcacion obj m1 m2)	= if(heightT m1 > heightT m2)
+												then Izq : caminoRamaMasLarga m1
+												else Der : caminoRamaMasLarga m2
+
+-- Devuelve una lista con los tesoroos, sino una lista vacia.
+tesorosPerLevel :: Mapa -> [[Objecto]]
+tesorosPerLevel (Cofre obj)				= [tesoro obj]
+tesorosPerLevel (Bifurcacion obj m1 m2)	= [tesoro obj] : unirListas (tesorosPerLevel m1) (tesorosPerLevel m2)
+
+--Devuelve los tesoros separados por nivel en el árbol.
+tesoro :: Objeto -> [Tesoro]
+tesoro Tesoro = [Tesoro]
+tesoro _ 	  = []
+
+todosLosCaminos :: Mapa -> [[Dir]]
+--Devuelve todos lo caminos en el mapa.
+todosLosCaminos (Cofre obj)						= []
+todosLosCaminos (Bifurcacion obj m1 (Cofre _))  = agregarDir Izq (todosLosCaminos m1)
+todosLosCaminos (Bifurcacion obj (Cofre _)) m2  = agregarDir Der (todosLosCaminos m2)
+todosLosCaminos (Bifurcacion obj m1 m2)		    = agregarDir Izq (todosLosCaminos m1) ++ 
+													agregarDir Der (todosLosCaminos m2)
+
+agregarDir :: Dir -> [[Dir]] -> [[Dir]]
+agregarDir d []			= [[d]]
+agregarDir d (ds:dss)	= (d:ds) : agregarDir d dss

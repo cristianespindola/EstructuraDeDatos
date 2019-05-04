@@ -1,4 +1,4 @@
-module Stack(Stack, emptyS, push, pop, top, isEmptyS) where
+module Stack(Stack, emptyS, isEmptyS, push, pop, top, isEmptyS) where
 
 data Stack a = MkS [a] Int  deriving (Show,Eq)
 --   Tipo        Constructor   Tipo de representacion
@@ -13,7 +13,7 @@ emptyS = MkS [] 0
 
 --Dada una pila indica si está vacía.
 isEmptyS :: Stack a -> Bool -- O(1)
-isEmptyS (MkS xs n) = n==o
+isEmptyS (MkS xs n) = n==0
 
 --Dados un elemento y una pila, agrega el elemento a la pila.
 push  :: a -> Stack a -> Stack a -- O(1)

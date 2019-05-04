@@ -1,4 +1,6 @@
 import Stack
+
+data Tree a =  Nodo a (Tree a) (Tree a) | Vacio deriving (Eq, Show)
 --Dada una lista devuelve una pila sin alterar el orden de los elementos.
 apilar :: [a] -> Stack a 
 apilar []		= emptyS
@@ -7,7 +9,7 @@ apilar (x:xs)	= push x (apilar xs)
 
 --Dada una pila devuelve una lista sin alterar el orden de los elementos.
 desapilar :: Stack a -> [a]
-desapilar s = if (isEmpltyS s)
+desapilar s = if (isEmptyS s)
 				then []
 				else top s:desapilar(pop s)
 
@@ -24,6 +26,6 @@ menos, entonces los paréntesis están balaceados. Pista: recorra una stack pasa
 parámetro a una subtarea que devuelve un booleano, que indifica si los parentesis están
 balanceados.
 -}
-balanceado :: String -> Bool 
-balanceado []		=
-balanceado (x:xs)	=
+balanceado :: String -> Bool
+balanceado [] = True
+balanceado xs = False 

@@ -1,4 +1,4 @@
-module Queue(Queue, emptyQ, queue, dequeue, firstQ, isEmptyQ, lenQ) where
+module Queue(Queue, emptyQ, queue, dequeue, firstQ, isEmptyQ, largoQ) where
 
 data Queue a = MkQ [a] Int  deriving (Show,Eq)
 --   Tipo        Constructor   Tipo de representacion
@@ -25,5 +25,5 @@ firstQ (MkQ xs n) = head xs
 isEmptyQ :: Queue a -> Bool -- O(1)
 isEmptyQ (MkQ xs n) = n == 0
 
-lenQ :: Queue a -> Int
-lenQ (MkQ xs n) = n
+largoQ :: Queue a -> Int
+largoQ (MkQ xs n) = n

@@ -35,12 +35,12 @@ parámetro a una subtarea que devuelve un booleano, que indifica si los parentes
 balanceados.
 -}
 balanceado :: String -> Bool
-balanceado xs = v xs emptyS
+balanceado xs = verificarParentesis xs emptyS
 
-v:: String -> Stack Char -> Bool
-v [] s = isEmptyS s 
-v (x:xs) s = if( x == '(')
-				then  v xs (push x s)
+verificarParentesis:: String -> Stack Char -> Bool
+verificarParentesis [] s = isEmptyS s 
+verificarParentesis (x:xs) s = if( x == '(')
+				then  verificarParentesis xs (push x s)
 				else if( x == ')')
-						then v xs (pop s)
-						else v xs s 
+						then verificarParentesis xs (pop s)
+						else verificarParentesis xs s 

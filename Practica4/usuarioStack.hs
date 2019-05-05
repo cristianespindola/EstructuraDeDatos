@@ -15,7 +15,15 @@ desapilar s = if (isEmptyS s)
 
 --Dado un árbol devuelve una pila con los elementos apilados inorder.
 treeToStack :: Tree a -> Stack a
-treeToStack t = apilar(listInOrden t)
+treeToStack Vacio = emptyS
+treeToStack (Nodo x t1 t2) = agregar(treeToStack t1) (push x (treeToStack t2))
+--apilar(listInOrden t)
+
+agregar :: Stack a -> Stack a -> Stack a
+agregar s1 s2 = if(isEmptyS s1)
+					then s2
+					else push (top s1) (agregar (pop s1) s2)
+
 
 {-Toma un string que representa una expresión aritmética, por ejemplo ”(2 + 3) ∗ 2”,
 y verifica que la cantidad de paréntesis que abren se corresponda con los que cierran.
@@ -27,5 +35,12 @@ parámetro a una subtarea que devuelve un booleano, que indifica si los parentes
 balanceados.
 -}
 balanceado :: String -> Bool
-balanceado [] = True
-balanceado xs = False 
+balanceado xs = v xs emptyS
+
+v:: String -> Stack Char -> Bool
+v [] s = isEmptyS s 
+v (x:xs) s = if( x == '(')
+				then  v xs (push x s)
+				else if( x == ')')
+						then v xs (pop s)
+						else v xs s 

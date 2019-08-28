@@ -106,9 +106,7 @@ leGanaA :: Pokemon -> Pokemon -> Bool
 --Dados dos pokemon indica si el primero le puede ganar al segundo.
 --Se considera que gana si su elemento es opuesto al del otro pokemon.
 --Si poseen el mismo elemento se considera que no gana.
-leGanaA (ConsPoke _ t1) (ConsPoke _ t2) = if t1 == t2
-											then False
-											else elementoGanador t1 == t2
+leGanaA (ConsPoke _ t1) (ConsPoke _ t2) = elementoGanador t1 == t2
 
 capturarPokemon :: Pokemon -> Entrenador -> Entrenador
 --Agrega un pokemon a la lista de pokemon del entrenador.

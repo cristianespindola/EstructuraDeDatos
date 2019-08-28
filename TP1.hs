@@ -106,9 +106,9 @@ isEmpty [] = True
 isEmpty _ = False
 
 -- Prop: Dada una lista devuelve su primer elemento
-head :: [a] -> a
-head [] = error "La lista esta vacia, NO tiene elementos"
-head (x:xs) = x 
+head' :: [a] -> a
+head' [] = error "La lista esta vacia, NO tiene elementos"
+head' (x:xs) = x 
 
 --Prop: Dada una lista devuelve esa lista menos el primer elemento
 tail :: [a] -> [a]
@@ -308,7 +308,30 @@ ubicarPorSigno x (ns, ps) =
 subtails :: [a] -> [[a]]
 subtails [] = []
 subtails (x:xs) = (x:xs) : subtails (xs)
- 
+
+
+-- Prec. Dada una lista xs devuelve una lista de listas donde cada sublista contiene elementos contiguos iguales de xs.
+agrupar :: Eq a => [a] -> [[a]]
+agrupar []		= []
+agrupar (x:xs)	= agregar x (agrupar xs)
+
+agregar :: Eq a => a -> [[a]] -> [[a]]
+agregar e []	 = [[e]]
+agregar e (xs:xss) = if (e == head' xs)
+						then (e:xs):xss
+						else [e]:xs:xss
+
+--Devuelve T rue si la primera lista es prefijo de la segunda.
+esPrefijo :: Eq a => [a] -> [a] -> Bool
+esPrefijo [] [] = True
+esPrefijo xs [] = False
+esPrefijo [] ys = True
+esPrefijo (x:xs) (y:ys) = x == y && esPrefijo xs ys
+
+--Devuelve T rue si la primera lista es sufijo de la segunda.
+esSufijo :: Eq a => [a] -> [a] -> Bool
+esSufijo xs ys = esPrefijo (reverse xs) (reverse ys)
+
 -- Prec. xs tiene elementos
 minimo :: [Int] -> Int
 minimo [] = error "no tiene elementos"

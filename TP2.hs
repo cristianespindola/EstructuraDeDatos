@@ -206,6 +206,20 @@ sacarIngrediente x (Agregar i p)	= if (x == i)
 										else sacarIngrediente x p 
 
 
+armarPizza :: [Ingrediente] -> Pizza
+--Dada una lista de ingredientes construye una pizza
+armarPizza []	  = Prepizza
+armarPizza (i:is) = Agregar i (armarPizza is)
+
+duplicarAceitunas :: Pizza -> Pizza
+--Recorre cada ingrediente y si es aceitunas duplica su cantidad
+duplicarAceitunas Prepizza		= Prepizza
+duplicarAceitunas (Agregar i p) = Agregar (duplicarSiHayAceitunas i) (duplicarAceitunas p)
+
+duplicarSiHayAceitunas :: Ingrediente -> Ingrediente
+duplicarSiHayAceitunas (AceitunasVerdes n) = (AceitunasVerdes (n*2))
+duplicarSiHayAceitunas i = i
+
 cantJamon :: [Pizza] -> [(Int, Pizza)]
 --Dada una lista de pizzas devuelve un par donde la primera componente es la cantidad de jamón de la pizza que es la segunda componente.
 cantJamon []		= []

@@ -188,6 +188,11 @@ data Pizza = Prepizza | Agregar Ingrediente Pizza  	deriving (Show,Eq)
 
 data Ingrediente = Salsa | Queso | Jamon | AceitunasVerdes Int deriving(Show, Eq)
 
+pizza :: Pizza
+pizza = Prepizza
+pizza1 = Agregar Queso pizza
+pizza2 = Agregar Jamon pizza1
+
 sacar :: [Ingrediente] -> Pizza -> Pizza
 --Saca los ingredientes de la pizza que se encuentren en la lista
 sacar []	 p = p
@@ -227,8 +232,11 @@ cantJamon (x:xs)	= tuplaConCantJamon x : cantJamon xs
 
 tuplaConCantJamon :: Pizza -> (Int, Pizza)
 tuplaConCantJamon Prepizza			= (0,Prepizza)
-tuplaConCantJamon (Agregar Jamon p) = ( 1 + fst (tuplaConCantJamon p), snd (tuplaConCantJamon p))
-tuplaConCantJamon p 				=  tuplaConCantJamon p 
+tuplaConCantJamon (Agregar Jamon p) = 
+										let (n,pizza) = tuplaConCantJamon p
+										in (n+1, pizza)
+--( 1 + fst (tuplaConCantJamon p), snd (tuplaConCantJamon p))
+tuplaConCantJamon (Agregar i p)		=  tuplaConCantJamon p 
 
 mayorNAceitunas :: Int -> [Pizza] -> [Pizza]
 --Devuelve las pizzas con más de “n” aceitunas.

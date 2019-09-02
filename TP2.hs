@@ -154,7 +154,11 @@ tieneEnergia (ConsPoke e _) = e > 0
 
 esExperto :: Entrenador -> Bool
 --Dado un entrenador devuelve True si ese entrenador posee al menos un pokemon de cada tipo posible.
-esExperto (ConsE _ ps) = tienePokemosAgua ps && tienePokemosFuego ps && tienePokemosPlanta ps
+esExperto (ConsE _ ps) = tienePokemosTipo Agua ps && tienePokemosTipo Fuego ps && tienePokemosTipo Planta ps
+
+tienePokemosTipo :: TipoDePokemon -> [Pokemon] -> Bool
+tienePokemosTipo tp []		= False
+tienePokemosTipo tp (p:ps)  = tipoPoke p == tp || tienePokemosTipo tp ps
 
 tienePokemosAgua :: [Pokemon] -> Bool
 tienePokemosAgua []		= False

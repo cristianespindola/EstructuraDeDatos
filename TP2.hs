@@ -140,11 +140,11 @@ lePuedeGanar (ConsE n (p:ps)) pk 	= leGanaA p pk || lePuedeGanar (ConsE n ps) pk
 
 puedenPelear :: TipoDePokemon -> Entrenador -> Entrenador -> Bool
 --Dados un tipo de pokemon y dos entrenadores, devuelve True si ambos entrenadores tiene al menos un pokemon de ese tipo y que tenga energía para pelear.
-puedenPelear tp entr1 entr2 	= puedePelear tp entr1 && puedePelear tp entr2
+puedenPelear tp (ConsE _ ps1) (ConsE _ ps2) 	= puedePelear tp ps1 && puedePelear tp ps2
 
-puedePelear :: TipoDePokemon -> Entrenador -> Bool
-puedePelear tp (ConsE n []) 	 = False
-puedePelear tp (ConsE n (p:ps))  = puedenPelearPokemon tp p || puedePelear tp (ConsE n ps)
+puedePelear :: TipoDePokemon -> [Pokemon] -> Bool
+puedePelear tp [] 	 	= False
+puedePelear tp (p:ps)   = puedenPelearPokemon tp p || puedePelear tp ps
 
 puedenPelearPokemon :: TipoDePokemon -> Pokemon -> Bool
 puedenPelearPokemon tp p = tp == tipoPoke p && tieneEnergia p

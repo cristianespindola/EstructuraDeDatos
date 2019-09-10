@@ -146,8 +146,8 @@ hayTesoroO _ 	  = False
 hayTesoroEn :: [Dir] -> Mapa -> Bool
 hayTesoroEn [] m 	 					 = hayTesoro m
 hayTesoroEn ds (Cofre obj) 				 = False
-hayTesoroEn (Izq:ds) (Bifurcacion m1 m2) = hayTesoroEn ds m1
-hayTesoroEn (Der:ds) (Bifurcacion m1 m2) = hayTesoroEn ds m2
+hayTesoroEn (Izq:ds) (Bifurcacion _ m1 m2) = hayTesoroEn ds m1
+hayTesoroEn (Der:ds) (Bifurcacion _ m1 m2) = hayTesoroEn ds m2
 
 --Indica el camino al tesoro. Precondición: hay un sólo tesoro en el mapa.
 caminoAlTesoro :: Mapa -> [Dir]
@@ -164,22 +164,30 @@ caminoRamaMasLarga (Bifurcacion obj m1 m2)	= if(heightT m1 > heightT m2)
 												else Der : caminoRamaMasLarga m2
 
 -- Devuelve una lista con los tesoroos, sino una lista vacia.
-tesorosPerLevel :: Mapa -> [[Objecto]]
+tesorosPerLevel :: Mapa -> [[Objeto]]
 tesorosPerLevel (Cofre obj)				= [tesoro obj]
-tesorosPerLevel (Bifurcacion obj m1 m2)	= [tesoro obj] : unirListas (tesorosPerLevel m1) (tesorosPerLevel m2)
+tesorosPerLevel (Bifurcacion obj m1 m2)	= tesoro obj : unirListas (tesorosPerLevel m1) (tesorosPerLevel m2)
 
 --Devuelve los tesoros separados por nivel en el árbol.
-tesoro :: Objeto -> [Tesoro]
+tesoro :: Objeto -> [Objeto]
 tesoro Tesoro = [Tesoro]
 tesoro _ 	  = []
 
-todosLosCaminos :: Mapa -> [[Dir]]
+todosLosCaminos' :: Mapa -> [[Dir]]
 --Devuelve todos lo caminos en el mapa.
+todosLosCaminos' (Cofre obj) = [[]]
+todosLosCaminos' (Bifurcacion obj mi md) = agregarA Izq (todosLosCaminos' mi) ++ agregarA Der (todosLosCaminos' md)  
+{--
 todosLosCaminos (Cofre obj)						= []
-todosLosCaminos (Bifurcacion obj m1 (Cofre _))  = agregarDir Izq (todosLosCaminos m1)
-todosLosCaminos (Bifurcacion obj (Cofre _)) m2  = agregarDir Der (todosLosCaminos m2)
+todosLosCaminos (Bifurcacion _ (Cofre _) (Cofre _)) = [[Izq], [Der]]
+todosLosCaminos (Bifurcacion obj m1 (Cofre _))  = agregarDir Izq (todosLosCaminos m1) ++ [[Der]]
+todosLosCaminos (Bifurcacion obj (Cofre _)) m2  = [[Izq]] ++ agregarDir Der (todosLosCaminos m2)
 todosLosCaminos (Bifurcacion obj m1 m2)		    = agregarDir Izq (todosLosCaminos m1) ++ 
 													agregarDir Der (todosLosCaminos m2)
+--}
+agregarA :: a -> [[a]] -> [[a]]
+agregarA a [] = []
+agregarA a (x:xs) = ([a] ++ x) : agregarA a xs
 
 agregarDir :: Dir -> [[Dir]] -> [[Dir]]
 agregarDir d []			= [[d]]

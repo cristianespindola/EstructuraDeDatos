@@ -157,11 +157,11 @@ caminoAlTesoro (Bifurcacion obj m1 m2)	= if(hayTesoro m1)
 											else Der : caminoAlTesoro m2 
 
 --Indica el camino de la rama más larga.
-caminoRamaMasLarga :: Mapa -> [Dir]
-caminoRamaMasLarga (Cofre obj)				= []
-caminoRamaMasLarga (Bifurcacion obj m1 m2)	= if(heightT m1 > heightT m2)
-												then Izq : caminoRamaMasLarga m1
-												else Der : caminoRamaMasLarga m2
+--caminoRamaMasLarga :: Mapa -> [Dir]
+--caminoRamaMasLarga (Cofre obj)				= []
+--caminoRamaMasLarga (Bifurcacion obj m1 m2)	= if(heightT m1 > heightT m2)
+--												then Izq : caminoRamaMasLarga m1
+--												else Der : caminoRamaMasLarga m2
 
 -- Devuelve una lista con los tesoroos, sino una lista vacia.
 tesorosPerLevel :: Mapa -> [[Objeto]]
@@ -192,3 +192,50 @@ agregarA a (x:xs) = ([a] ++ x) : agregarA a xs
 agregarDir :: Dir -> [[Dir]] -> [[Dir]]
 agregarDir d []			= [[d]]
 agregarDir d (ds:dss)	= (d:ds) : agregarDir d dss
+
+------------------------------------------------------------------------------------------------
+data Exp = Constante Int | ExpUnaria OpUnaria Exp | ExpBinaria OpBinaria Exp Exp deriving Show
+data OpUnaria = Neg deriving Show
+data OpBinaria = Suma | Resta | Mult | Div deriving Show
+
+--Dada una expresión evalúe esta expresión y retorne su valor. ¿Qué casos hacen que eval sea
+--una función parcial?
+eval :: Exp -> Int
+eval (Constante n) = n
+eval (ExpUnaria neg exp) = -(eval exp)
+eval (ExpBinaria op exp1 exp2) = evalOperacion op (eval exp1)  (eval exp2)
+
+evalOperacion :: OpBinaria -> Int -> Int -> Int
+evalOperacion Div n 0 = error "No se puede dividir por cero"
+evalOperacion Div 0 n = n
+evalOperacion Div n m = div n m
+evalOperacion Mult 0 n = 0
+evalOperacion Mult n 0 = 0
+evalOperacion Mult n m = n * m
+evalOperacion Suma n m = n + m
+evalOperacion Resta n m = n - m
+
+--Dada una expresión la simplifica según los siguientes criterios:
+simplificar :: Exp -> Exp
+simplificar (Constante n) = Constante n
+simplificar (ExpUnaria neg exp) = ExpUnaria neg (simplificar exp)
+simplificar (ExpBinaria op exp1 exp2) = simplificarExp op (simplificar exp1) (simplificar exp2)
+simplificar (ExpBinaria Div exp1 exp2) = ExpBinaria Div exp1 exp2
+
+simplificarExp :: OpBinaria -> Exp -> Exp -> Exp
+simplificarExp Suma exp1 exp2 = simplificarSuma exp1 exp2
+simplificarExp Resta exp1 exp2 = simplificarResta exp1 exp2
+simplificarExp Mult exp1 exp2 = simplificarMult exp1 exp2
+
+simplificarSuma :: Exp -> Exp -> Exp
+simplificarSuma (Constante 0) (Constante n) = Constante n
+simplificarSuma (Constante n) (Constante 0) = Constante n
+
+simplificarResta :: Exp -> Exp -> Exp
+simplificarResta (Constante 0) (Constante n) = Constante (-n)
+
+simplificarMult :: Exp -> Exp -> Exp
+simplificarMult (Constante 1) (Constante n) = Constante n
+simplificarMult (Constante n) (Constante 1) = Constante n
+simplificarMult (Constante 0) (Constante n) = Constante 0
+simplificarMult (Constante n) (Constante 0) = Constante 0

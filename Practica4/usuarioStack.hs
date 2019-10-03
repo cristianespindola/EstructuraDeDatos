@@ -42,5 +42,7 @@ verificarParentesis [] s = isEmptyS s
 verificarParentesis (x:xs) s = if( x == '(')
 				then  verificarParentesis xs (push x s)
 				else if( x == ')')
-						then verificarParentesis xs (pop s)
+						then if(isEmptyS s)
+								then False
+								else verificarParentesis xs (pop s)
 						else verificarParentesis xs s 

@@ -19,3 +19,13 @@ unirQ :: Queue a -> Queue a -> Queue a
 unirQ q1 q2 = if isEmptyQ q2
 				then q1
 				else unirQ (queue (firstQ q2) q1) (dequeue q2)
+
+pepe = ConsP "pepe" 10
+
+pepa = ConsP "pepa" 20
+
+queueString = enqueue pepe (enqueue pepa emptyQ)
+                                                                                                                                                           
+queuePar = enqueue 6 (enqueue 4 (enqueue 2 emptyQ))
+
+queueImpar = enqueue 5 (enqueue 3 (enqueue 1 emptyQ))

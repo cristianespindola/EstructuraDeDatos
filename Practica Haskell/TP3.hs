@@ -193,6 +193,10 @@ agregarDir :: Dir -> [[Dir]] -> [[Dir]]
 agregarDir d []			= [[d]]
 agregarDir d (ds:dss)	= (d:ds) : agregarDir d dss
 
+caminoConTesoros = Bifurcacion Chatarra (Bifurcacion Chatarra (Bifurcacion Tesoro (Bifurcacion Chatarra (Cofre Chatarra) (Cofre Chatarra)) (Cofre Chatarra)) (Bifurcacion Tesoro (Cofre Chatarra) (Bifurcacion Tesoro (Cofre Chatarra) (Bifurcacion Chatarra (Cofre Chatarra) (Cofre Chatarra))))) (Bifurcacion Chatarra (Bifurcacion Chatarra (Cofre Chatarra) (Cofre Chatarra)) (Bifurcacion Chatarra (Cofre Chatarra) (Bifurcacion Tesoro (Cofre Chatarra) (Cofre Chatarra))))
+
+caminoCon1Tesoro = Bifurcacion Chatarra (Bifurcacion Chatarra (Bifurcacion Chatarra (Bifurcacion Chatarra (Cofre Chatarra) (Cofre Chatarra)) (Cofre Chatarra)) (Bifurcacion Chatarra (Cofre Chatarra) (Bifurcacion Tesoro (Cofre Chatarra) (Bifurcacion Chatarra (Cofre Chatarra) (Cofre Chatarra))))) (Bifurcacion Chatarra (Bifurcacion Chatarra (Cofre Chatarra) (Cofre Chatarra)) (Bifurcacion Chatarra (Cofre Chatarra) (Bifurcacion Chatarra (Cofre Chatarra) (Cofre Chatarra))))
+
 ------------------------------------------------------------------------------------------------
 data Exp = Constante Int | ExpUnaria OpUnaria Exp | ExpBinaria OpBinaria Exp Exp deriving Show
 data OpUnaria = Neg deriving Show

@@ -46,3 +46,9 @@ verificarParentesis (x:xs) s = if( x == '(')
 								then False
 								else verificarParentesis xs (pop s)
 						else verificarParentesis xs s 
+
+stackDeNumeros = push 1 (push 2 (push 3 (push 4 (push 5 emptyS))))                                                                            |
+                                                                                                                                              |
+arbolDeNumeros =  NodeT 1 (NodeT 2 (NodeT 4 EmptyT EmptyT) (NodeT 5 EmptyT EmptyT)) (NodeT 3 (NodeT 6 EmptyT EmptyT) (NodeT 7 EmptyT EmptyT))
+
+expresionAritmetica = "(2*3) )("

@@ -1,6 +1,8 @@
 module Set(Set, emptyS, addS, belongs, sizeS, removeS, unionS, setToList) where
 
-data Set a = MKS [a] deriving (Show) -- el TIPO DE REPRESENTACIÓN 
+data Set a = MKS [a] deriving (Show) 
+-- Set Con Repetidos
+-- el TIPO DE REPRESENTACIÓN 
   -- INV.REP.: NINGUNO! Toda lista es aceptable.	
 
 -- Crea un Set vacío.

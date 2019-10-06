@@ -1,6 +1,6 @@
 module MappingDosList(Map, emptyM, assocM, deleteM, lookupM, domM) where
 
-data Map clave valor = ConsM [ (clave, valor) ]
+data Map clave valor = ConsM [clave] [valor]
                       {- INV.REP.: no hay claves repetidas en la lista -}
                       
 --------------                 
@@ -18,9 +18,9 @@ domM    :: Eq k => Map k v -> [ k ] -- La lista resultante NO tiene repetidos
 -- Implementacion
 --------------                 
 emptyM                  = ConsM [] []                   -- O(1)
-assocM  (ConsM ks vs) k v = ConsM (assocK ks k) (assocV vs (indice ks k) v)    -- O(n), porque assocRep es O(n)
-deleteM (ConsM ks vs) k   = ConsM (deleteK ks k) (deleteV (indice k ks)vs k)     -- O(n), porque deleteRep es O(n)
-lookupM (ConsM ks vs) k   = lookupRep ks vs k             -- O(n), porque lookupRep es O(n)
+assocM  (ConsM ks vs) k v = ConsM (assocK ks k) (assocV (indice k ks) v vs)    -- O(n), porque assocRep es O(n)
+deleteM (ConsM ks vs) k   = ConsM (deleteK k ks) (deleteV (indice k ks) k vs)     -- O(n), porque deleteRep es O(n)
+lookupM (ConsM ks vs) k   = lookupRep k ks vs             -- O(n), porque lookupRep es O(n)
 domM    (ConsM ks vs)     = ks                  -- O(n), porque es O(n)
 
 --------------                 
@@ -33,7 +33,7 @@ assocK :: Eq k => [k] -> k -> [k]
 assocK []     e  = [e]
 assocK (k:ks) e  = if(e == k)
 						then e:ks
-						else k: assocK ks e v
+						else k: assocK ks e
 
 assocV :: Eq v => Int -> v -> [v] -> [v]
 assocV 0 e xs		= (e:xs)
@@ -65,4 +65,4 @@ lookupRep :: Eq k => k -> [k] -> [v]  -> Maybe v
 lookupRep e [] _		= Nothing
 lookupRep e (k:ks) (v:vs) = if(k == e)
 							then Just v
-							else buscar e ks vs
+							else lookupRep e ks vs

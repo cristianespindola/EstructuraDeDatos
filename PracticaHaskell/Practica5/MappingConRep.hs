@@ -29,10 +29,11 @@ domM    (ConsM kvs)     = domRep kvs                  -- O(m^2), porque domRep e
 deleteRep :: Eq k => [(k,v)] -> k -> [(k,v)]
 -- PROPOSITO: la clave k no aparece en la lista resultante
 -- EFICIENCIA: O(m)
-deleteRep []       k v = []
-deleteRep (kv:kvs) k v = if(k == fst kv)
-						then kvs
-						else kv: deleteRep kvs k v
+deleteRep []       k = []
+deleteRep (kv:kvs) k = if(fst kv == k) 
+							then kvs
+							else kv:(deleteRep kvs k) 
+
 
 lookupRep :: Eq k => [(k,v)] -> k -> Maybe v
 -- PROPOSITO: retorna el primer valor asociado a k en la lista, si existe
@@ -40,12 +41,16 @@ lookupRep :: Eq k => [(k,v)] -> k -> Maybe v
 lookupRep [] _		= Nothing
 lookupRep (kv:kvs) k = if(k == fst kv)
 					then Just(snd kv)
-					else buscar kvs k
+					else lookupRep kvs k
 
 domRep :: Eq k => [(k,v)] -> [ k ]
 -- PROPOSITO: retorna la lista de claves, sin repetidos
 -- EFICIENCIA: O(m^2)
 domRep []		= []
-domRep (kv:kvs)	= if(elem kv kvs)
+domRep ((k,v):kvs)	= if(perteneceK k kvs)
 					then domRep kvs
-					else kv:domRep kvs
+					else k:domRep kvs
+
+perteneceK :: Eq k => k-> [(k,v)] -> Bool
+perteneceK x []		= False
+perteneceK x (y:ys) = x == fst y || perteneceK x ys

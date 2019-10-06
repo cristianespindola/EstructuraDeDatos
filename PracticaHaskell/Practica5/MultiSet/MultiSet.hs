@@ -61,3 +61,13 @@ elemsRep :: Eq a => Map a Int -> [ a ]
 elemsRep m = Map.domM m  
              -- NO tiene repetidos, por propiedad de Map.domM
    
+ocurrencia :: String -> Map Char Int
+ocurrencia [] _ = emptyM
+ocurrencia (x:xs) = agregarM x (ocurrencia xs)
+
+agregarM :: Char -> Map Char Int -> Map Char Int
+agregarM c m = assocM c (masUNo (lookupM m)) m
+
+masUNo :: Maybe -> Int
+masUNo Nothing = 0
+masUNo (Just x) = x + 1

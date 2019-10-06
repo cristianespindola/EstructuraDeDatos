@@ -1,4 +1,4 @@
-module BinaryHeap (Heap, emptyH, isEmptyH,insertH, findMinH, deleteMin, splitMin) where
+module Heap (Heap, emptyH, isEmptyH,insertH, findMinH, deleteMin, splitMin) where
 
 {--
 		Inv.Rpe:  + El arbol tiene orden heap-Min

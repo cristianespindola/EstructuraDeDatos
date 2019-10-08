@@ -1,6 +1,6 @@
 import Stack
 
-data Tree a =  Nodo a (Tree a) (Tree a) | Vacio deriving (Eq, Show)
+data Tree a =  NodeT a (Tree a) (Tree a) | EmptyT deriving (Eq, Show)
 --Dada una lista devuelve una pila sin alterar el orden de los elementos.
 apilar :: [a] -> Stack a 
 apilar []		= emptyS
@@ -15,8 +15,8 @@ desapilar s = if (isEmptyS s)
 
 --Dado un árbol devuelve una pila con los elementos apilados inorder.
 treeToStack :: Tree a -> Stack a
-treeToStack Vacio = emptyS
-treeToStack (Nodo x t1 t2) = agregar(treeToStack t1) (push x (treeToStack t2))
+treeToStack EmptyT = emptyS
+treeToStack (NodeT x t1 t2) = agregar(treeToStack t1) (push x (treeToStack t2))
 --apilar(listInOrden t)
 
 agregar :: Stack a -> Stack a -> Stack a
@@ -47,8 +47,8 @@ verificarParentesis (x:xs) s = if( x == '(')
 								else verificarParentesis xs (pop s)
 						else verificarParentesis xs s 
 
-stackDeNumeros = push 1 (push 2 (push 3 (push 4 (push 5 emptyS))))                                                                            |
-                                                                                                                                              |
+stackDeNumeros = push 1 (push 2 (push 3 (push 4 (push 5 emptyS)))) 
+
 arbolDeNumeros =  NodeT 1 (NodeT 2 (NodeT 4 EmptyT EmptyT) (NodeT 5 EmptyT EmptyT)) (NodeT 3 (NodeT 6 EmptyT EmptyT) (NodeT 7 EmptyT EmptyT))
 
 expresionAritmetica = "(2*3) )("

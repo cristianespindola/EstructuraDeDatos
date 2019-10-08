@@ -24,4 +24,4 @@ agregar :: Eq a => [a] -> Set a -> Set a
 agregar [] s 	 = s
 agregar (x:xs) s = addS x (agregar xs s)
 
-arbolDeConjuntos = NodeT (addS 1 (addS 2 (addS 3 (addS 4 emptyS)))) (NodeT (addS 5 (addS 6 (addS 7 (addS 8 emptyS)))) EmptyT EmptyT) (NodeT (addS 9 (addS 10 (addS 11 (addS 12 emptyS)))) EmptyT EmptyT)|
+arbolDeConjuntos = Nodo (addS 1 (addS 2 (addS 3 (addS 4 emptyS)))) (Nodo (addS 5 (addS 6 (addS 7 (addS 8 emptyS)))) Vacio Vacio) (Nodo (addS 9 (addS 10 (addS 11 (addS 12 emptyS)))) Vacio Vacio)

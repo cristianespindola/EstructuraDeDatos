@@ -1,4 +1,4 @@
-import Map
+import MappingSinRep
 
 buscarClaves :: Eq k => [k] -> Map k v -> [Maybe v]
 --Busca todas las claves dadas en la lista.
@@ -26,9 +26,16 @@ unirDoms (x:xs)= domM x ++ unirDoms xs
 mapSuccM :: Eq k => [k] -> Map k Int -> Map k Int
 --Dada una lista de claves de tipo k y un mapa que va de k a int, le suma uno a cada número asociado con dichas claves.
 mapSuccM []		m = emptyM
-mapSuccM (x:xs) m = is(isNothing(lookupM m x))
+mapSuccM (x:xs) m = if(isNothing(lookupM m x))
 					then mapSuccM xs m
 					else assocM (mapSuccM xs m) x (fromJust(lookupM m x) + 1)
+
+isNothing :: Maybe a -> Bool
+isNothing Nothing = True
+isNothing _ = False
+
+fromJust :: Maybe a -> a
+fromJust (Just x) = x 
 
 agregarMap:: Eq k => Map k v -> Map k v -> Map k v
 --Dado dos maps se agregan las claves y valores del primer map en el segundo. Si una clave del primero existe en el segundo, es reemplazada por la del primero.
@@ -36,20 +43,27 @@ agregarMap m1 m2 = agregar (domM m1) m1 m2
 
 agregar:: Eq k => [k] -> Map k v -> Map k v -> Map k v
 agregar []		m1 m2 = m2
-agregar (x:xs)  m1 m2 = assocM (agregar xs m1 m2) (fromJust(lookupM m1 x))
+agregar (x:xs)  m1 m2 = assocM (agregar xs m1 m2) x (fromJust(lookupM m1 x))
 
+----------------------------------------------------------------------------------------------
+
+--Dada una lista de elementos construye un Map que relaciona cada elemento 
+--con su posición en la lista.
 indexar :: [a] -> Map Int a
---Dada una lista de elementos construye un Map que relaciona cada elemento con su posición en la lista.
+indexar xs = index xs 0
 
+index :: [a] -> Int -> Map Int a 
+index [] n = emptyM 
+index (x:xs) n = assocM (index xs (n+1)) n x 
 
 ocurrencias :: String -> Map Char Int
 --Dado un string cuenta las ocurrencias de cada caracter utilizando un Map.
 ocurrencias []	 	= emptyM
-ocurrencias (x:xs) 	= agregar x(ocurrencias xs)
+ocurrencias (x:xs) 	= agregar' x (ocurrencias xs)
 
-agregar :: Char -> Map Char Int -> Map Char Int
-agregar c m = assocM c (masUno (lookupM m)) m
+agregar' :: Char -> Map Char Int -> Map Char Int
+agregar' c m = assocM m c (masUno (lookupM m c))	
 
-masUno :: Maybe -> Int
+masUno :: Maybe Int -> Int
 masUno Nothing = 1
 masUno (Just x) = x +1

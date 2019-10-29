@@ -1,0 +1,73 @@
+# depslib dependency file v1.0
+1463796476 source:/home/morellatoariel/Dropbox/UNQ/CPP/FamiliaConPerro_funcional_estatica/familia.cpp
+	"familia.h"
+
+1463795754 /home/morellatoariel/Dropbox/UNQ/CPP/FamiliaConPerro_funcional_estatica/familia.h
+	<iostream>
+	"persona.h"
+
+1463796739 source:/home/morellatoariel/Dropbox/UNQ/CPP/FamiliaConPerro_funcional_estatica/main.cpp
+	<iostream>
+	"familia.h"
+
+1463795640 /home/morellatoariel/Dropbox/UNQ/CPP/FamiliaConPerro_funcional_estatica/persona.h
+	<iostream>
+	"perro.h"
+
+1463795645 /home/morellatoariel/Dropbox/UNQ/CPP/FamiliaConPerro_funcional_estatica/perro.h
+	<iostream>
+
+1463795708 source:/home/morellatoariel/Dropbox/UNQ/CPP/FamiliaConPerro_funcional_estatica/perro.cpp
+	"perro.h"
+
+1463796017 source:/home/morellatoariel/Dropbox/UNQ/CPP/FamiliaConPerro_funcional_estatica/persona.cpp
+	"persona.h"
+
+1463829856 source:c:\users\fidel\appdata\local\temp\familiaconperro_funcional_estatica\main.cpp
+	<iostream>
+	"familia.h"
+
+1463829659 c:\users\fidel\appdata\local\temp\familiaconperro_funcional_estatica\familia.h
+	<iostream>
+	"persona.h"
+
+1463829597 c:\users\fidel\appdata\local\temp\familiaconperro_funcional_estatica\persona.h
+	<iostream>
+	"perro.h"
+
+1463829597 c:\users\fidel\appdata\local\temp\familiaconperro_funcional_estatica\perro.h
+	<iostream>
+
+1463829783 source:c:\users\fidel\appdata\local\temp\familiaconperro_funcional_estatica\familia.cpp
+	"familia.h"
+
+1463829597 source:c:\users\fidel\appdata\local\temp\familiaconperro_funcional_estatica\perro.cpp
+	"perro.h"
+
+1463829530 source:c:\users\fidel\appdata\local\temp\familiaconperro_funcional_estatica\persona.cpp
+	"persona.h"
+
+1463829856 source:c:\users\usuario\desktop\tpi\estructura\familiaconperro_funcional_estatica\main.cpp
+	<iostream>
+	"familia.h"
+
+1463829659 c:\users\usuario\desktop\tpi\estructura\familiaconperro_funcional_estatica\familia.h
+	<iostream>
+	"persona.h"
+
+1463829597 c:\users\usuario\desktop\tpi\estructura\familiaconperro_funcional_estatica\persona.h
+	<iostream>
+	"perro.h"
+
+1463829597 c:\users\usuario\desktop\tpi\estructura\familiaconperro_funcional_estatica\perro.h
+	<iostream>
+
+1463829597 source:c:\users\usuario\desktop\tpi\estructura\familiaconperro_funcional_estatica\perro.cpp
+	"perro.h"
+
+1463829530 source:c:\users\usuario\desktop\tpi\estructura\familiaconperro_funcional_estatica\persona.cpp
+	"persona.h"
+
+1463829934 source:c:\users\usuario\desktop\tpi\estructura\familiaconperro_funcional_estatica\familia.cpp
+	"familia.h"
+

@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1465161844 source:c:\users\sawa\desktop\arrays\persona.cpp
+	"Persona.h"
+
+1465161882 c:\users\sawa\desktop\arrays\persona.h
+	<iostream>
+
+1465161906 source:c:\users\sawa\desktop\arrays\aula.cpp
+
+1465171943 source:c:\users\sawa\desktop\arrays\main.cpp
+	<iostream>
+	"Persona.h"
+	"ArrayList.h"
+
+1465172030 source:c:\users\sawa\desktop\arrays\arraylist.cpp
+	"ArrayList.h"
+
+1465171699 c:\users\sawa\desktop\arrays\arraylist.h
+	<iostream>
+

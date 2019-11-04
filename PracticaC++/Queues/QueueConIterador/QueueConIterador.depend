@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1509209270 source:c:\users\publico\desktop\practica de c++\queues - copia\queueconiterador\main.cpp
+	<iostream>
+	"Queue.h"
+
+1509797166 c:\users\publico\desktop\practica de c++\queues - copia\queueconiterador\queue.h
+	<iostream>
+

@@ -1,0 +1,41 @@
+# depslib dependency file v1.0
+1464411296 source:c:\users\sawa\desktop\queueversion2\main.cpp
+	<iostream>
+	"Queue.h"
+
+1464410377 source:c:\users\sawa\desktop\queueversion2\queue.cpp
+	"Queue.h"
+
+1464409399 c:\users\sawa\desktop\queueversion2\queue.h
+	<iostream>
+
+1464610140 source:c:\users\agustina\desktop\queues\queueversion2\main.cpp
+	<iostream>
+	"Queue.h"
+
+1464610140 c:\users\agustina\desktop\queues\queueversion2\queue.h
+	<iostream>
+
+1464610140 source:c:\users\agustina\desktop\queues\queueversion2\queue.cpp
+	"Queue.h"
+
+1509209061 source:c:\users\publico\downloads\queues\queues\queueversion2\main.cpp
+	<iostream>
+	"Queue.h"
+
+1509209061 c:\users\publico\downloads\queues\queues\queueversion2\queue.h
+	<iostream>
+
+1509209061 source:c:\users\publico\downloads\queues\queues\queueversion2\queue.cpp
+	"Queue.h"
+
+1509209061 source:c:\users\publico\desktop\practica de c++\queues\queueversion2\main.cpp
+	<iostream>
+	"Queue.h"
+
+1509793966 c:\users\publico\desktop\practica de c++\queues\queueversion2\queue.h
+	<iostream>
+
+1509794009 source:c:\users\publico\desktop\practica de c++\queues\queueversion2\queue.cpp
+	"Queue.h"
+

@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1509815616 source:c:\users\publico\desktop\practica de c++\hashing\arraylist.cpp
+	"ArrayList.h"
+
+1509815584 c:\users\publico\desktop\practica de c++\hashing\arraylist.h
+	<iostream>
+	"Persona.h"
+
+1385316878 source:c:\users\publico\desktop\practica de c++\hashing\main.cpp
+	<iostream>
+
+1509813634 source:c:\users\publico\desktop\practica de c++\hashing\persona.cpp
+	"Persona.h"
+
+1509815672 c:\users\publico\desktop\practica de c++\hashing\persona.h
+	<iostream>
+
+1509815713 source:c:\users\publico\desktop\practica de c++\hashing\hashmap.cpp
+	"HashMap.h"
+
+1509815588 c:\users\publico\desktop\practica de c++\hashing\hashmap.h
+	<iostream>
+	"ArrayList.h"
+
+1509815882 source:c:\users\publico\desktop\practica de c++\hashing\hashset.cpp
+	"HashSet.h"
+
+1509815887 c:\users\publico\desktop\practica de c++\hashing\hashset.h
+	<iostream>
+	"ArrayList.h"
+

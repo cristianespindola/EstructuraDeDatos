@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1464965632 source:c:\users\publico\desktop\stack\iterador.cpp
+
+1464972906 source:c:\users\publico\desktop\stack\main.cpp
+	<iostream>
+	"stack.h"
+
+1464973013 c:\users\publico\desktop\stack\stack.h
+
+1464972699 source:c:\users\publico\desktop\stack\stack.cpp
+	<iostream>
+	"stack.h"
+
+1464972908 source:c:\users\usuario\desktop\tpi\estructura\stack\main.cpp
+	<iostream>
+	"stack.h"
+
+1464973014 c:\users\usuario\desktop\tpi\estructura\stack\stack.h
+
+1464965634 source:c:\users\usuario\desktop\tpi\estructura\stack\iterador.cpp
+
+1464965634 source:f:\facultad\tpi\estructura\stack\iterador.cpp
+
+1464972908 source:f:\facultad\tpi\estructura\stack\main.cpp
+	<iostream>
+	"stack.h"
+
+1464973014 f:\facultad\tpi\estructura\stack\stack.h
+

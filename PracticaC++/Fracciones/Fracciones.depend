@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1540484199 source:/home/esroj/Escritorio/Fracciones/Fracciones.cpp
+	"Fracciones.h"
+
+1540483232 /home/esroj/Escritorio/Fracciones/Fracciones.h
+	<iostream>
+
+1540487152 source:/home/esroj/Escritorio/Fracciones/main.cpp
+	<iostream>
+	"Fracciones.h"
+

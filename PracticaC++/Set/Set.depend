@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1541197490 source:/home/esroj/Escritorio/Set/main.cpp
+	<iostream>
+	"SetFuncional.h"
+	"SetDestructiva.h"
+
+1541195659 /home/esroj/Escritorio/Set/SetFuncional.h
+	<iostream>
+
+1541197031 /home/esroj/Escritorio/Set/SetDestructiva.h
+	<iostream>
+
+1541197246 source:/home/esroj/Escritorio/Set/SetDestructiva.cpp
+	"SetDestructiva.h"
+
+1541197226 source:/home/esroj/Escritorio/Set/SetFuncional.cpp
+	"SetFuncional.h"
+

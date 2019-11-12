@@ -16,3 +16,20 @@
 1541197226 source:/home/esroj/Escritorio/Set/SetFuncional.cpp
 	"SetFuncional.h"
 
+1541197490 source:c:\users\esroj\desktop\estructuradedatos\practicac++\set\main.cpp
+	<iostream>
+	"SetFuncional.h"
+	"SetDestructiva.h"
+
+1541195659 c:\users\esroj\desktop\estructuradedatos\practicac++\set\setfuncional.h
+	<iostream>
+
+1541197031 c:\users\esroj\desktop\estructuradedatos\practicac++\set\setdestructiva.h
+	<iostream>
+
+1541197246 source:c:\users\esroj\desktop\estructuradedatos\practicac++\set\setdestructiva.cpp
+	"SetDestructiva.h"
+
+1541197226 source:c:\users\esroj\desktop\estructuradedatos\practicac++\set\setfuncional.cpp
+	"SetFuncional.h"
+

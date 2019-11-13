@@ -11,7 +11,7 @@ struct MagoSt {
 Mago crearMago(string nombre) {
    Mago m = new MagoSt;
    m->nombre = nombre;
-   m->hechizos = NULL;
+   m->hechizos = emptyS();
    return m;
 }
 
@@ -30,7 +30,7 @@ void aprenderHechizo(Hechizo h, Mago m) {
 /// Proposito: devuelve la cantidad de hechizos
 /// Costo: O(1)
 Set hechizosMago(Mago m) {
-   COMPLETAR(hechizosMago);
+   return m->hechizos;
 }
 
 /// Proposito: indica si ambos magos son el mismo (tienen el mismo nombre)
@@ -48,5 +48,6 @@ bool sabeMasMago(Mago m1, Mago m2) {
 /// Proposito: destruye toda la memoria de un mago, incluyendo el conjunto de hechizos
 /// Costo: O(n)
 void destroyMago(Mago m) {
-   COMPLETAR(destroyMago);
+    m->hechizos = emptyS();
+    delete m;
 }

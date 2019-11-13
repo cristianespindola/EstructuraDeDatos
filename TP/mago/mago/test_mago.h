@@ -54,10 +54,10 @@ TEST(test_destroyMago, {
 
 void correrTestMago() {
    test_crearMago_nombre_y_hechizos();
-  // test_un_aprenderHechizo();
-   //test_mismoMago();
-   //test_sabeMasMago();
-   //test_destroyMago();
+   test_un_aprenderHechizo();
+   test_mismoMago();
+   test_sabeMasMago();
+   test_destroyMago();
 }
 
 #endif

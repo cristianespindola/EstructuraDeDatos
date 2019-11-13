@@ -122,3 +122,49 @@
 	"mago.h"
 	"../common/Common.h"
 
+1573575805 source:c:\users\esroj\desktop\estructuradedatos\tp\mago\hechizo\hechizo.cpp
+	"hechizo.h"
+	"../common/Common.h"
+
+1573569301 c:\users\esroj\desktop\estructuradedatos\tp\mago\hechizo\hechizo.h
+	<iostream>
+
+1573569301 c:\users\esroj\desktop\estructuradedatos\tp\mago\common\common.h
+	<ctime>
+	<cstdio>
+	<cstdlib>
+	<cassert>
+	<iostream>
+
+1573575651 source:c:\users\esroj\desktop\estructuradedatos\tp\mago\set\set.cpp
+	"set.h"
+	"../common/Common.h"
+
+1573569301 c:\users\esroj\desktop\estructuradedatos\tp\mago\set\set.h
+	"../hechizo/hechizo.h"
+
+1573569301 source:c:\users\esroj\desktop\estructuradedatos\tp\mago\mago\main.cpp
+	<iostream>
+	"test_mago.h"
+
+1573653127 c:\users\esroj\desktop\estructuradedatos\tp\mago\mago\test_mago.h
+	<iostream>
+	"mago.h"
+	"../hechizo/hechizo.h"
+	"../common/Test.h"
+
+1573569301 c:\users\esroj\desktop\estructuradedatos\tp\mago\mago\mago.h
+	<iostream>
+	"../hechizo/hechizo.h"
+	"../set/set.h"
+
+1573569301 c:\users\esroj\desktop\estructuradedatos\tp\mago\common\test.h
+	<iostream>
+	<string>
+	<cstdlib>
+	<vector>
+
+1573653108 source:c:\users\esroj\desktop\estructuradedatos\tp\mago\mago\mago.cpp
+	"mago.h"
+	"../common/Common.h"
+
